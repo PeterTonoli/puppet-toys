@@ -1,0 +1,68 @@
+### Settings for VoyantServer ###
+
+# These are settings that define default values for VoyantServer. In most cases
+# the indicated values can be used (or blank to use a default). You can also 
+# override the values in this settings file if you launch VoyantServer from the
+# command line by using -Dorg.voyanttools.server.SETTING=VALUE. For instance:
+# java -Dorg.voyanttools.server.memory=2048 -jar VoyantServer.jar headless=true
+
+# The port to use for the web server (default is 8888). If a port is already in use,
+# this can be changed (8889, etc.). If the server terminated unexpectedly the port
+# may continue being used and restarting the machine is one way of resetting things.
+port = 8888
+
+# The amount of memory in MB to allocate to the server. The default value here (1024)
+# is higher than needed in most cases, but with very large text collections, it may
+# need to be even higher (2048, 4096, etc.)
+memory = 12000
+
+# The absolute path to an existing parent directory that the server should use for data.
+# The server doesn't delete data when it's terminated but by default the data folder
+# can be a temporary directory that may disappear after a machine restart.
+# Leave this blank to use the default directory. The default directory will be a
+# temporary directory determined by your operation system UNLESS there's a folder
+# called data in the same directory as this settings file – in that case the data folder
+# will be used. If you want this behaviour, just create an empty data folder in this
+# directory (after that, you can zip up the parent folder and redistribute VoyantServer
+# with existing data – this can be used in conjunction with the uri_path below to open
+# up an existing corpus automatically (/?corpus=id where id is replaced by the real
+# corpus ID that you've created). If the data directory exists and you want to use it
+# leave this value blank.
+data_directory = /mnt/voyant
+
+# The URI path (after the domain) to use (default is /). This is a good way to provide
+# load a corpus by default, ex: uri_path = /?input=http://cbc.ca/news/ or /?corpus=333.333
+# (where 333.333 is an existing local corpus).
+# It's also possible to build a custom menu for the open menu on the front page. Separate
+# the corpus ID and a label by a colon and separate multiple entries by commas, making sure
+# to escape characters (like spaces), eg:  /?openMenu=444.444:Corpus+One;555.555:Corpus+Two
+uri_path = /
+
+# This allows you to limit traffic to the specific host (domain or IP). By default (127.0.0.1)
+# it is set to be restrictive and to only accept local requests (in order to favour privacy).
+# VoyantServer is also a convenient way to host an instance of Voyant Tools that you might
+# want to have more widely accessible, in which case you should comment out this line or remove
+# the value.
+# host = 127.0.0.1
+
+# By default VoyantServer will direct output to the console window within the VoyantServer
+# application (this is a useful place to see what's happening, especially when things go
+# wrong); when in headless mode, logs are simply directed to the standard output. This
+# setting allows you to direct VoyantServer logs to a file instead, which is especially
+# useful when you want to leave a server running and detached from the console
+# value should be true or anything else for false (including blank).
+logs_file =
+
+# This option defines which corpora appear in the drop-down menu when the user opens an
+# existing corpus. If this is commented out or blank then the default value is used
+# (currently the Austen and Shakespeare corpora). Corpora are defined using a special
+# syntax: corpusID:label and multiple corpora are separated by semi-colon. For instance,
+# this would be the default:
+# open_menu = shakespeare:Shakespeare's Plays;austen:Austen's Novels
+open_menu =
+
+# This allows you to prevent Voyant from accepting any further input, in other words no new
+# documents can be added. That doesn't necessarily mean no new corpora can be created, there
+# may be a new corpus based on a subset of an existing corpus. The default value is true
+# (to allow new input), set this to false to prevent new input from being added.
+allow_input = true
